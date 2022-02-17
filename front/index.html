@@ -1,0 +1,34 @@
+<html>
+    <body>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        inserire mail:
+        <input type="text" id="mail" placeholder="email" />
+        inserire password:
+        <input type="password" id="psw" placeholder="password" />
+        <button id="b1">invia</button>
+        <script>
+            $("#b1").click(function(){
+                let mail = $("#mail").val();
+                let psw = $("#psw").val();
+                if (mail && psw) {
+                    console.log($("#mail").val());
+                    console.log($("#psw").val());
+                    $.ajax(
+                        {
+                            url: ("http://localhost:5000/api/login?email="+mail+"&psw="+psw),
+                            method: "GET",
+                            success: function(data){
+                                console.log("success ",data)
+                            },
+                            error: function(data){
+                                console.log("error ",data)
+                            }
+                        }
+                    )
+                } else {
+                    console.log("nessun valore")  
+                }  
+            });
+        </script>
+    </body>
+</html>

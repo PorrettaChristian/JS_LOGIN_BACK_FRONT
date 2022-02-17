@@ -15,13 +15,15 @@
                     console.log($("#psw").val());
                     $.ajax(
                         {
-                            url: ("http://localhost:5000/api/login?email="+mail+"&psw="+psw),
+                            url: ("http://localhost:5000/api/login?mail="+mail+"&psw="+psw),
                             method: "GET",
                             success: function(data){
-                                console.log("success ",data)
+                                console.log("success: ",data)
+                                $("body").attr("style", "background-color: green");
                             },
                             error: function(data){
-                                console.log("error ",data)
+                                $("body").attr("style", "background-color: red");
+                                console.log("error: ",data)
                             }
                         }
                     )

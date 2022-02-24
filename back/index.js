@@ -7,6 +7,8 @@ var fs = require("fs");
 var host = "localhost";
 var port = 5000;
 
+var array = [];
+
 apiServer.listen(port, host, ()=>{
     console.log("server ---> http://%s:%d", host, port)
 })
@@ -26,6 +28,22 @@ apiServer.get("/api/login", (req , res) => {
             } else {
                 res.status(400).json({message: "login non effettuato"});
             }
+        }
+    });
+})
+
+apiServer.get("/api/reg", (req , res) => {
+    console.log("ricevuti" , req.query.mail , req.query.psw);
+    var str = {"mail" : req.query.mail, "psw" : req.query.psw};
+    array.push(str);
+    fs.writeFile("users.json", JSON.stringify(array), (err) =>{
+        if(err){
+            console.log(err);
+            res.status(400).json({message: "reg non effettuato"});
+        }
+        else{
+            console.log("ho scritto");
+            res.status(200).json({message: "reg effettuato"});
         }
     });
 })

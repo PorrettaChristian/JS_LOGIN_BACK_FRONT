@@ -6,6 +6,13 @@
         inserire password:
         <input type="password" id="psw" placeholder="password" />
         <button id="b1">invia</button>
+        <br><br><br>
+        <h1>REGISTRAZIONE</h1>
+        inserire mail:
+        <input type="text" id="mail1" placeholder="email" />
+        inserire password:
+        <input type="password" id="psw1" placeholder="password" />
+        <button id="b2">invia</button>
         <script>
             $("#b1").click(function(){
                 let mail = $("#mail").val();
@@ -16,6 +23,30 @@
                     $.ajax(
                         {
                             url: ("http://localhost:5000/api/login?mail="+mail+"&psw="+psw),
+                            method: "GET",
+                            success: function(data){
+                                console.log("success: ",data)
+                                $("body").attr("style", "background-color: green");
+                            },
+                            error: function(data){
+                                $("body").attr("style", "background-color: red");
+                                console.log("error: ",data)
+                            }
+                        }
+                    )
+                } else {
+                    console.log("nessun valore")  
+                }  
+            });
+            $("#b2").click(function(){
+                let mail = $("#mail1").val();
+                let psw = $("#psw1").val();
+                if (mail && psw) {
+                    console.log($("#mail").val());
+                    console.log($("#psw").val());
+                    $.ajax(
+                        {
+                            url: ("http://localhost:5000/api/reg?mail="+mail+"&psw="+psw),
                             method: "GET",
                             success: function(data){
                                 console.log("success: ",data)

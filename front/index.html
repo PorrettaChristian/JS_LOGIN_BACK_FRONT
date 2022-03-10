@@ -6,10 +6,9 @@
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <div class=".container-fluid">
             <h1>LOGIN IN IN</h1>
-            <div class="form-floating">
-                <input type="text" id="mail" placeholder="email" />
-                <label for="floatingInput">inserire mail:</label>
-            </div>
+            <label for="floatingInput">inserire mail:</label>    
+            <input type="text" id="mail" placeholder="email" />
+               
             <!-- inserire mail:
             <input type="text" id="mail" placeholder="email" /> -->
             inserire password:
@@ -37,6 +36,8 @@
                             success: function(data){
                                 console.log("success: ",data)
                                 $("body").attr("style", "background-color: green");
+                                window.localStorage.setItem("id_user", "1");
+                                window.location.replace("home.html"); //replace rimuove la storia della navigazione, cioe una volta andata nella pagina home non va piu la freccettina per andare idnietro
                             },
                             error: function(data){
                                 $("body").attr("style", "background-color: red");

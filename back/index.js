@@ -10,7 +10,7 @@ const mysql = require('mysql2');
 const connection = mysql.createConnection({
     host: 'porretta.christian.tave.osdb.it',
     user: 'c189_christian',
-    password: "Az-72944",
+    password: "password",
     database: 'c189_5AI_2021',
 })
   

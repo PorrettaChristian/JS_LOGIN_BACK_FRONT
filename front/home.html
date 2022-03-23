@@ -10,12 +10,14 @@
         </div>
         <script>
             $("#b1").click(function(){
+                    console.log("local: ",localStorage.getItem("id_user"))
                     $.ajax(
                         {
-                            url: ("http://localhost:5000/api/getVoti"),
+                            url: ("http://localhost:5000/api/getVoti?id_user="+localStorage.getItem("id_user")),
                             method: "GET",
                             success: function(data){
                                 console.log("success: ",data)
+                                $("body").append("<h1>",data.voti,"</h1>")
                                 $("body").attr("style", "background-color: green");
                             },
                             error: function(data){

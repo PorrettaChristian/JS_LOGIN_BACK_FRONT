@@ -6,12 +6,11 @@ var fs = require("fs");
 const mysql = require('mysql2');
 
 
-
 const connection = mysql.createConnection({
-    host: 'porretta.christian.tave.osdb.it',
-    user: 'c189_christian',
-    password: "password",
-    database: 'c189_5AI_2021',
+    host: 'localhost',
+    user: 'christian',
+    password: "maionese17",
+    database: '5AI_prova',
 })
   
 var host = "localhost";
@@ -26,15 +25,14 @@ apiServer.listen(port, host, ()=>{
 apiServer.get("/api/login", (req , res) => {
     console.log("ricevuti" , req.query.mail , req.query.psw);
     connection.query(
-        'SELECT * FROM `users` WHERE `mail` = ? AND `psw` = ?',
+        'SELECT id FROM `users` WHERE `mail` = ? AND `psw` = ?',
         [req.query.mail, req.query.psw],
         function(err, results, fields) {
             if (results.length === 0) res.status(400).json({message: "log non effettuato"});
             else {
-                console.log(results[0].id)
+                // console.log("ciaooo: ",results[0].id)
                 // localStorage.setItem("id_user", results[0].id);
-                
-                res.status(200).json({message: "log effettuato"});
+                res.status(200).json({id: results[0].id});
             }
         }
     );
@@ -55,15 +53,20 @@ apiServer.get("/api/reg", (req , res) => {
 
 apiServer.get("/api/getVoti", (req , res) => {
     //console.log("ricevuti" , req.query.mail , req.query.psw);
+    
     connection.query(
         'SELECT * FROM `voti` WHERE `id_user` = ? ',
-        [localStorage.getItem("id_user")],
+        [req.query.id_user],
         function(err, results, fields) {
             console.log(err);
             if (err)  res.status(400).json({message: "reg non effettuato"});
             else{
-                console.log("res: ",results);
-                res.status(200).json({message: "reg effettuato"}); 
+                for (let i = 0; i < results.length; i++) {
+                    array [i] = results[i].voto
+                }
+                console.log("res: ",array);
+                res.status(200).json({voti: array}); 
+                array = []
             } 
         }
     );

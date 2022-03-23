@@ -36,7 +36,7 @@
                             success: function(data){
                                 console.log("success: ",data)
                                 $("body").attr("style", "background-color: green");
-                                window.localStorage.setItem("id_user", "1");
+                                window.localStorage.setItem("id_user", data.id);
                                 window.location.replace("home.html"); //replace rimuove la storia della navigazione, cioe una volta andata nella pagina home non va piu la freccettina per andare idnietro
                             },
                             error: function(data){
